@@ -48,4 +48,3 @@ This plugin is licensed under the **GNU GPLv3 or later**. For more information, 
 
 This plugin is developed by [``Fahad Ahmed``](https://www.linkedin.com/in/fahad-ahmed-optimist/)
 
-
