@@ -13,7 +13,7 @@ class DBargainCheckSubscriptionApi{
         $this->prefix = 'dbargain_rest_methods';
         $this->namespace_auth = '/dbargain/auth';
         $this->namespace_dbargain_post = '/dbargain/post';
-        $this->namespace_property_get = '/dbargain/get';
+        $this->namespace_dbargain_get = '/dbargain/get';
         add_action('rest_api_init', array( $this, 'dbargain_register_routes' ) );
     }
 
@@ -29,36 +29,12 @@ class DBargainCheckSubscriptionApi{
             )
         );
 
-        register_rest_route($this->namespace_property_get,'/membership', array(
-            // Notice how we are registering multiple endpoints the 'schema' equates to an OPTIONS request.
-                array(
-                    'methods'  => 'GET',
-                    'callback' => array( $this, 'getdbargainCheckMembership'),
-                    'permission_callback' => '__return_true'
-                ),
-            )
-        );
-
-    }
-
-    public function getdbargainCheckMembership() {
-
-    
-        $response['status'] = $this->dBargainApiStatus('OK');
-        $response['message'] = 'Merchant id successfully found';
-
-        return rest_ensure_response($response);
 
     }
 
     public function dbargainCheckMembership(WP_REST_Request $request) {
 
         global $wpdb;
-
-
-        //if(!isset($request['membershipId']) || empty($request['membershipId'])){
-        //    return new WP_Error( 'rest_forbidden', esc_html__( 'Json is not set or empty' ), array( 'status' => $this->property_request_status('NOT FOUND') ) );
-        //}
 
         if(!isset($request['dbargainMerchantId']) || empty($request['dbargainMerchantId'])){
             $response['status'] = $this->dBargainApiStatus('NOT FOUND');
